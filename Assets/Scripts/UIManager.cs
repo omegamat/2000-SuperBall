@@ -10,14 +10,21 @@ public class UIManager : MonoBehaviour
 {
     
     public static UIManager instance{get; private set;} //Singleton
-
+    //for MainMenu
     public Transform SphereMainMenu;
+
+    //PlayerUI
     public Text TimeText;
     public Text VelocityText;
     public Text CoinText;
     public PlayerController player; 
     private float secondsCount;
     private float velocity;
+
+    //ScoreScrenn
+    public Transform scoreScreen;
+    private Text sc_cointext;
+    private Text sc_Timetext;
 
     private int coins = 0;
 
@@ -30,7 +37,11 @@ public class UIManager : MonoBehaviour
         else 
         { 
             instance = this; 
-        } 
+        }
+
+        sc_Timetext = scoreScreen.GetChild(0).gameObject.GetComponent<Text>();
+        sc_cointext = scoreScreen.GetChild(1).gameObject.GetComponent<Text>(); 
+         
     }
     private void Start() 
     {
@@ -38,11 +49,23 @@ public class UIManager : MonoBehaviour
     }
     private void Update() 
     {
+         SettingUI();
+         //SettingScoreScreen();
+    }
+
+    private void SettingUI()
+    {
         secondsCount += Time.deltaTime;
         velocity = player.velocimetro;
         TimeText.text = "Time: " + (int)secondsCount;
         VelocityText.text = "Speed: " + (int)velocity;  
-        CoinText.text = "CyberBits: " + coins;  
+        CoinText.text = "CyberBits: " + coins; 
+    }
+    public void ScoreScreen()
+    {
+        scoreScreen.gameObject.SetActive(true);
+        sc_Timetext.text = "TIME: " + (int)secondsCount;
+        sc_cointext.text = "CYBERBITS: " + coins;
     }
     public void ReciveCoins()
     {
@@ -60,14 +83,16 @@ public class UIManager : MonoBehaviour
     public void OnLoadNextScene()
     {
         int netxSceneID = SceneManager.GetActiveScene().buildIndex + 1;
-        if(SceneManager.GetSceneByBuildIndex(netxSceneID) != null)
-        {
+        int totalSceneInBuild = SceneManager.sceneCountInBuildSettings - 1;
+
+        //Debug.Log(SceneManager.GetSceneByBuildIndex(netxSceneID));
+        Debug.Log(SceneManager.sceneCountInBuildSettings -1);
+        if (netxSceneID <= totalSceneInBuild)
             SceneManager.LoadScene(netxSceneID);
-        }
-        if(SceneManager.GetSceneByBuildIndex(netxSceneID) == null)
-        {
-            SceneManager.LoadScene(0);
-        }
+        if (netxSceneID > totalSceneInBuild)
+            SceneManager.LoadScene(0); 
+
+        
     }
     public static void ResetScene()
     {

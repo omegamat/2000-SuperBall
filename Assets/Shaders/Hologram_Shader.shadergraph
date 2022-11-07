@@ -149,6 +149,9 @@
         },
         {
             "m_Id": "2d6c7a2d44ce46209eafa3dd0e1eff4e"
+        },
+        {
+            "m_Id": "d5c16f850a934e7299a344f216df0719"
         }
     ],
     "m_GroupDatas": [],
@@ -404,6 +407,20 @@
                     "m_Id": "ab8d221191a34ad4bb1802789bedee99"
                 },
                 "m_SlotId": 2
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "d5c16f850a934e7299a344f216df0719"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "f38132b84be94eb89d7b59044ac7c123"
+                },
+                "m_SlotId": 1
             }
         },
         {
@@ -689,9 +706,9 @@
     },
     "m_Color": {
         "color": {
-            "r": 0.06603771448135376,
-            "g": 0.06603771448135376,
-            "b": 0.06603771448135376,
+            "r": 0.028301894664764406,
+            "g": 0.028301894664764406,
+            "b": 0.028301894664764406,
             "a": 0.0
         },
         "mode": 0
@@ -3021,7 +3038,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Scale",
     "m_StageCapability": 3,
-    "m_Value": 7.360000133514404,
+    "m_Value": 6.639999866485596,
     "m_DefaultValue": 10.0,
     "m_Labels": []
 }
@@ -3885,6 +3902,41 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "d5c16f850a934e7299a344f216df0719",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -1526.0,
+            "y": 256.0,
+            "width": 189.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "e2998e137c9a4c0ebaa81b01f0ac57eb"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "ec83f48d1e214dbfa5dfab52f0a9f6a7"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.AddNode",
     "m_ObjectId": "d60ef5d94d334ae49f2e6b8974536559",
     "m_Group": {
@@ -4023,6 +4075,27 @@
     "m_ShaderOutputName": "Out",
     "m_StageCapability": 3,
     "m_BareResource": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
+    "m_ObjectId": "e2998e137c9a4c0ebaa81b01f0ac57eb",
+    "m_Id": 0,
+    "m_DisplayName": "HologramEffectTilling",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0
+    },
+    "m_Labels": []
 }
 
 {
@@ -4270,10 +4343,10 @@
     "m_Guid": {
         "m_GuidSerialized": "032472f0-1c03-4bd6-a369-2623411ecc75"
     },
-    "m_Name": "Tilling",
+    "m_Name": "HologramEffectTilling",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Tilling",
-    "m_DefaultReferenceName": "_Tilling",
+    "m_RefNameGeneratedByDisplayName": "HologramEffectTilling",
+    "m_DefaultReferenceName": "_HologramEffectTilling",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -4283,8 +4356,8 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "x": -0.7900000214576721,
-        "y": 1.0,
+        "x": 0.0,
+        "y": 7.0,
         "z": 0.0,
         "w": 0.0
     }

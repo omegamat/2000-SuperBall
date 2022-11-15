@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2574606972598335622}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &7010804606143773106
 ParticleSystem:
@@ -10131,8 +10131,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2858107165182296487}
+  m_Children: []
   m_Father: {fileID: 2574606972938247469}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10214,7 +10213,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772988, y: 1}
+    m_SensorSize: {x: 1.7768924, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -10254,7 +10253,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2574606972598335622}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!108 &4345565564367483914
 Light:
@@ -10624,7 +10623,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2574606972598335622}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!198 &9115045034488337926
 ParticleSystem:
@@ -20400,6 +20399,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2858107165182296487}
   - {fileID: 4220289108888283417}
   - {fileID: 1957502080030334439}
   - {fileID: 3047052781882862805}
@@ -20500,7 +20500,7 @@ MonoBehaviour:
   velocimetro: 0
   m_SpeedForce: 50
   m_MaxSpeed: 20
-  m_JumpForce: 400
+  m_JumpForce: 500
   m_MaxDrag: 1
   m_MinDrag: 0
   jumpEffect: {fileID: 6769258750423613428}
@@ -20692,7 +20692,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 7533293921056668384}
+  m_Father: {fileID: 2574606972598335622}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &6477219892362552057

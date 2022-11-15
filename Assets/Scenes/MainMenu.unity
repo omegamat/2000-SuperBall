@@ -6384,7 +6384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c10655b0727164eb1281df6ceb0d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerUI: {fileID: 0}
+  m_time: 0
+  m_cyberCoins: 0
+  m_medals: 0
 --- !u!4 &1981494058
 Transform:
   m_ObjectHideFlags: 0
@@ -6415,7 +6417,9 @@ MonoBehaviour:
   SphereMainMenu: {fileID: 572784508}
   TimeText: {fileID: 0}
   VelocityText: {fileID: 0}
+  CoinText: {fileID: 0}
   player: {fileID: 0}
+  scoreScreen: {fileID: 0}
 --- !u!1 &2037972589
 GameObject:
   m_ObjectHideFlags: 0

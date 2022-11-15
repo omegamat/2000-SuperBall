@@ -10,8 +10,6 @@ public class UIManager : MonoBehaviour
 {
     
     public static UIManager instance{get; private set;} //Singleton
-    //for MainMenu
-    public Transform SphereMainMenu;
 
     //PlayerUI
     public Text TimeText;
@@ -100,22 +98,4 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(sceneID);
     }
 
-    public void RotateSphereMainMenu(int _p)
-    {
-        //Vector3 _rotation = new Vector3(_x,_y,_z);
-        switch (_p)
-        {
-            case 0:
-                SphereMainMenu.DORotate(Vector3.zero,0.25f);
-            break;
-            case 1:
-                SphereMainMenu.DORotate(new Vector3(0,-90f,0),0.25f);
-            break;
-            case 2:
-                SphereMainMenu.DORotate(new Vector3(0,90f,0),0.25f);
-            break;
-
-        }
-        //SphereMainMenu.DORotate(Vector3.zero,0.25f);
-    }
 }

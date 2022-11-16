@@ -4,10 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using UnityEngine.Audio;
 
 public class MainMenu : MonoBehaviour
 {
     public Transform objToRotate;
+    public AudioMixer audioMixer;
+    //public AudioMixer musicGroup;
+    //public AudioMixer soundEffectGroup;
 
     public void OnQuit()
     {
@@ -36,6 +40,20 @@ public class MainMenu : MonoBehaviour
         int sceneID = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(sceneID);
     }
+
+    public void SetVolumeMaster(float volume)
+    {
+        audioMixer.SetFloat("Master",volume);
+    }
+    public void SetVolumeMusic(float volume)
+    {
+        audioMixer.SetFloat("Music",volume);
+    }
+    public void SetVolumeSoundEffect(float volume)
+    {
+        audioMixer.SetFloat("SoundEffects",volume);
+    }
+
     public void RotateMenus(int _p)
     {
         //Vector3 _rotation = new Vector3(_x,_y,_z);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 using DG.Tweening;
 
@@ -18,13 +19,14 @@ public class UIManager : MonoBehaviour
     public Color[] VelocityColor = new Color[3];
     public Text CoinText;
     public PlayerController player; 
-    private float secondsCount;
+    private float timer;
     private float velocity;
 
-    //ScoreScrenn
+    //ScoreScreen
     public Transform scoreScreen;
     private Text sc_cointext;
     private Text sc_Timetext;
+    private TMP_Text sc_Ranktext;
     private Image playerUI_velocimetro;
 
     private int coins = 0;
@@ -41,23 +43,52 @@ public class UIManager : MonoBehaviour
         }
 
         sc_Timetext = scoreScreen.GetChild(0).gameObject.GetComponent<Text>();
-        sc_cointext = scoreScreen.GetChild(1).gameObject.GetComponent<Text>(); 
+        sc_cointext = scoreScreen.GetChild(1).gameObject.GetComponent<Text>();
+        sc_Ranktext = scoreScreen.GetChild(2).GetChild(0).gameObject.GetComponent<TMP_Text>(); 
          
     }
     private void Update() 
     {
+        timer += Time.smoothDeltaTime;
+
          SettingUI();
          //SettingScoreScreen();
     }
 
     private void SettingUI()
     {
-        secondsCount += Time.deltaTime;
+        //secondsCount += Time.deltaTime;
+        //float milliSeconds = 0;
+        //milliSeconds += (secondsCount * 100)% 100;
+
         velocity = player.velocimetro;
-        TimeText.text = "" + (int)secondsCount;
+        //TimeText.text = "" + (int)secondsCount + "." + milliSeconds;
+        TimeText.text = CountUpTimer();
         VelocityText.text = "" + (int)velocity;  
         CoinText.text = "" + coins;
         SettingVelocimetro();
+    }
+
+    string CountUpTimer()
+    {       
+        float _minutes = 0;
+        float _seconds = 0;
+        float _milliSeconds = 0;
+        string output;
+
+        
+
+        _minutes = timer / 60;
+        _seconds = timer % 60;
+        _milliSeconds += (timer * 100) % 100;
+
+        output = string.Format("{0}:{1}:{2}", (int)_minutes, (int)_seconds, (int)_milliSeconds);
+        //output = ""+ timer;
+        //Debug.Log ("timer" + output);
+
+        return output;
+
+        
     }
     private void SettingVelocimetro()
     {
@@ -75,8 +106,29 @@ public class UIManager : MonoBehaviour
     {
         scoreScreen.gameObject.SetActive(true);
         Time.timeScale = 0f;
-        sc_Timetext.text =  "" + (float)secondsCount;
+        sc_Timetext.text = CountUpTimer();
         sc_cointext.text = "CYBERBITS: " + coins;
+
+        int levelIndex = SceneManager.GetActiveScene().buildIndex;
+
+        if(timer >= GameManager.instance.scoreScreenRanks[levelIndex].m_rankC)
+        {
+            sc_Ranktext.text = "C";
+        }
+        if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankC)
+        {
+            sc_Ranktext.text = "C";
+        }
+        if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankB)
+        {
+            sc_Ranktext.text = "B";
+        }
+        if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankA)
+        {
+            sc_Ranktext.text = "A";
+        }
+        
+        
         
     }
     public void ReciveCoins()

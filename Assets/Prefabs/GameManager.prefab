@@ -44,3 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c10655b0727164eb1281df6ceb0d15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_time: 0
+  m_cyberCoins: 0
+  m_medals: 0
+  scoreScreenRanks:
+  - levelIndex: 1
+    rankA: 10
+    rankB: 20
+    rankC: 30
+  - levelIndex: 2
+    rankA: 10
+    rankB: 20
+    rankC: 30
+  - levelIndex: 3
+    rankA: 10
+    rankB: 20
+    rankC: 30
+  - levelIndex: 4
+    rankA: 10
+    rankB: 20
+    rankC: 30

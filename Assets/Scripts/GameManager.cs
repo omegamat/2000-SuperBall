@@ -37,6 +37,18 @@ public class GameManager : MonoBehaviour
     {
         return m_cyberCoins;
     }
+    
+    
+    public ScoreScreenRanks[] scoreScreenRanks;
+}
+[System.Serializable]
+public class ScoreScreenRanks
+{
+    public int m_levelIndex;
+
+    public float m_rankA = 10;
+    public float m_rankB = 20;
+    public float m_rankC = 30;
 
 }
 

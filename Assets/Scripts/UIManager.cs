@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     //PlayerUI
     public Text TimeText;
     public Text VelocityText;
+    public Image VelocityImage;
+    public Color[] VelocityColor = new Color[3];
     public Text CoinText;
     public PlayerController player; 
     private float secondsCount;
@@ -23,6 +25,7 @@ public class UIManager : MonoBehaviour
     public Transform scoreScreen;
     private Text sc_cointext;
     private Text sc_Timetext;
+    private Image playerUI_velocimetro;
 
     private int coins = 0;
 
@@ -41,10 +44,6 @@ public class UIManager : MonoBehaviour
         sc_cointext = scoreScreen.GetChild(1).gameObject.GetComponent<Text>(); 
          
     }
-    private void Start() 
-    {
-        
-    }
     private void Update() 
     {
          SettingUI();
@@ -55,15 +54,30 @@ public class UIManager : MonoBehaviour
     {
         secondsCount += Time.deltaTime;
         velocity = player.velocimetro;
-        TimeText.text = "Time: " + (int)secondsCount;
-        VelocityText.text = "Speed: " + (int)velocity;  
-        CoinText.text = "CyberBits: " + coins; 
+        TimeText.text = "" + (int)secondsCount;
+        VelocityText.text = "" + (int)velocity;  
+        CoinText.text = "" + coins;
+        SettingVelocimetro();
+    }
+    private void SettingVelocimetro()
+    {
+        float _maxVel = 30;
+        VelocityImage.fillAmount = Mathf.Clamp((player.velocimetro / _maxVel)*0.3f,0,0.3f);
+
+        if (player.velocimetro > _maxVel*0.3f)
+        VelocityImage.color = VelocityColor[0];
+        if (player.velocimetro > _maxVel*0.6f)
+            VelocityImage.color = VelocityColor[1];
+        if (player.velocimetro > _maxVel*0.85f)
+            VelocityImage.color = VelocityColor[2];
     }
     public void ScoreScreen()
     {
         scoreScreen.gameObject.SetActive(true);
-        sc_Timetext.text = "TIME: " + (int)secondsCount;
+        Time.timeScale = 0f;
+        sc_Timetext.text =  "" + (float)secondsCount;
         sc_cointext.text = "CYBERBITS: " + coins;
+        
     }
     public void ReciveCoins()
     {

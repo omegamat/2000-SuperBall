@@ -20,7 +20,9 @@ public class GameManager : MonoBehaviour
         else 
         { 
             instance = this; 
-        } 
+        }
+
+        Time.timeScale = 1f;
     }
     public void Test()
     {

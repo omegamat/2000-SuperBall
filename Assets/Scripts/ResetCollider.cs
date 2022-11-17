@@ -4,17 +4,30 @@ using UnityEngine;
 
 public class ResetCollider : MonoBehaviour
 {
-    //if true respaw, if false reset
-    public bool respawnOrReset = true;
+    private void OnTriggerEnter(Collider col) 
+    {
+         if (col.gameObject.tag == "Player")
+        {
+            Debug.Log("reset");
+            StartCoroutine(Death());
+
+        }  
+    }
     private void OnCollisionEnter(Collision col) 
     {
         if (col.gameObject.tag == "Player")
         {
-            if(respawnOrReset)
-                col.gameObject.SendMessage("Respawn");
-            if(!respawnOrReset)
-                col.gameObject.SendMessage("Reset");
+            Debug.Log("reset");
+            StartCoroutine(Death());
 
-        }   
+        }  
+    }
+    
+    IEnumerator Death()
+    {
+        gameObject.GetComponent<AudioSource>().Play();
+        
+        yield return new WaitForSeconds(2.4f);
+        UIManager.ResetScene();
     }
 }

@@ -12,6 +12,7 @@ public class OnColliderDoEvent : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
+            gameObject.GetComponent<AudioSource>().Play();
             onColliderEvent.Invoke();
         }
         

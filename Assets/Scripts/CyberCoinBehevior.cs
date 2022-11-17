@@ -11,7 +11,7 @@ public class CyberCoinBehevior : MonoBehaviour
 
     private void Start() 
     {
-        this.transform.DORotate(Vector3.up * 180, 2f).SetLoops(-1);
+        obj.transform.DORotate(Vector3.up * 180, 2f).SetLoops(-1);
         
     }
     private void OnTriggerEnter(Collider col)
@@ -23,6 +23,7 @@ public class CyberCoinBehevior : MonoBehaviour
                 coinEffect.Play();
                    
                 obj.SetActive(false);
+                this.gameObject.GetComponent<AudioSource>().Play();
                 isActive = false; 
 
                 UIManager.instance.ReciveCoins();

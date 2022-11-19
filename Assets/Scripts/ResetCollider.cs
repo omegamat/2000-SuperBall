@@ -27,7 +27,7 @@ public class ResetCollider : MonoBehaviour
     {
         gameObject.GetComponent<AudioSource>().Play();
         
-        yield return new WaitForSeconds(2.4f);
+        yield return new WaitForSeconds(2.0f);
         UIManager.ResetScene();
     }
 }

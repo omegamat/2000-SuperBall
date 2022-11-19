@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 
     public float velocimetro;
     public float m_SpeedForce = 500f;
-    public float m_MaxSpeed = 20f;
+    public float m_MaxSpeed = 40f;
     public float m_JumpForce = 300f;
     
     public float m_MaxDrag = 1f;
@@ -43,7 +43,10 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         Movement();
-
+        if (myRigid.velocity.magnitude > m_MaxSpeed)
+        {
+            myRigid.velocity = myRigid.velocity.normalized * m_MaxSpeed;
+        }
         if (jumpInput)
         {
             Jump();
@@ -122,6 +125,7 @@ public class PlayerController : MonoBehaviour
                 myRigid.drag = 1.5f;
                 //myRigid.drag = Mathf.Clamp(myRigid.drag, m_MinDrag, m_MaxDrag);
             }
+
         }
         
         if (!isGrounded())

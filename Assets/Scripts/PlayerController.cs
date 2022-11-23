@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public static PlayerController i{get; private set;}
 
-    public float velocimetro;
+    public float velocimetro = 0;
     public float m_SpeedForce = 500f;
     public float m_MaxSpeed = 40f;
     public float m_JumpForce = 300f;
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput = true;
 
     public ParticleSystem jumpEffect;
-    public ParticleSystem SpeedLineEffect;
+    //public ParticleSystem SpeedLineEffect;
     public ParticleSystem SpeedParticuleEffect;
 
     public float speedLimitForEffects = 30f;
@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
         {
             //decrease drag whent player is on air.
             myRigid.drag = 0;
-            myRigid.AddForce(movement * m_SpeedForce/4);
+            myRigid.AddForce(movement * m_SpeedForce);
         }
       
     }
@@ -156,12 +156,12 @@ public class PlayerController : MonoBehaviour
     {
         if (myRigid.velocity.magnitude >= _speed)
         {
-            SpeedLineEffect.Play();
+            //SpeedLineEffect.Play();
             SpeedParticuleEffect.Play();
         }
         if (myRigid.velocity.magnitude <= _speed)
         {
-            SpeedLineEffect.Stop();
+            //SpeedLineEffect.Stop();
             SpeedParticuleEffect.Stop();
         }
     }

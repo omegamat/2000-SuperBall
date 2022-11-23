@@ -51,8 +51,13 @@ public class UIManager : MonoBehaviour
     {
         timer += Time.smoothDeltaTime;
 
-         SettingUI();
-         //SettingScoreScreen();
+        SettingUI();
+        //SettingScoreScreen();
+
+        if(Input.GetButton("Return"))
+        {
+            ResetScene();
+        }
     }
 
     private void SettingUI()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,16 +9,16 @@ public class PlayerController : MonoBehaviour
 
     public float velocimetro = 0;
 
-    public float m_SpeedForce = 500f;
-    public float m_MaxSpeed = 40f;
+    public float m_SpeedForce = 80;
+    public float m_MaxSpeed = 35f;
     private float m_ActualMaxSpeed = 0;
-    public float m_MaxFallSpeed = 40f;
-    public float m_JumpForce = 300f;
+    public float m_MaxFallSpeed = 35f;
+    public float m_JumpForce = 2000f;
     
     public float m_MaxDrag = 1f;
     public float m_MinDrag = 0f;
 
-    public float m_acceleration = 5;
+    public float m_acceleration = 2;
     private float m_accel = 0;
 
     Rigidbody myRigid;
@@ -28,15 +29,15 @@ public class PlayerController : MonoBehaviour
     //public ParticleSystem SpeedLineEffect;
     public ParticleSystem SpeedParticuleEffect;
 
-    public float speedLimitForEffects = 30f;
+    public float speedLimitForEffects = 30f;   
     
-    void Start()
+    protected virtual void Start()
     {
         myRigid = gameObject.GetComponent<Rigidbody>();
         m_ActualMaxSpeed = m_MaxSpeed;
     }
 
-    void Update()
+    protected virtual void Update()
     {
         //save jump input to be used in fixed update.
         if (Input.GetButtonDown("Jump"))
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
         SpeedEffect(speedLimitForEffects);
 
         Acceleration(m_acceleration);
+
+        
 
         velocimetro = myRigid.velocity.magnitude;
     }
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
             myRigid.velocity = new Vector3 
             (
                 Mathf.Clamp(myRigid.velocity.x,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel),
-                Mathf.Clamp(myRigid.velocity.y,-m_MaxFallSpeed, m_MaxFallSpeed),
+                Mathf.Clamp(myRigid.velocity.y,-m_MaxFallSpeed, m_MaxFallSpeed * 10),
                 Mathf.Clamp(myRigid.velocity.z,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel)
             );
         }
@@ -206,6 +209,8 @@ public class PlayerController : MonoBehaviour
     {
         UIManager.ResetScene();
     }
+
+
 
 
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5584371568435895170
+--- !u!1 &6547115995081564329
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5584371568435895182}
-  - component: {fileID: 5584371568435895181}
+  - component: {fileID: 796295646975042381}
+  - component: {fileID: 602948282251362085}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5584371568435895182
+--- !u!4 &796295646975042381
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584371568435895170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.4, z: 0}
+  m_GameObject: {fileID: 6547115995081564329}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5584371568435895181
+--- !u!114 &602948282251362085
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5584371568435895170}
+  m_GameObject: {fileID: 6547115995081564329}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9c10655b0727164eb1281df6ceb0d15, type: 3}
@@ -48,19 +48,23 @@ MonoBehaviour:
   m_cyberCoins: 0
   m_medals: 0
   scoreScreenRanks:
-  - levelIndex: 1
-    rankA: 10
-    rankB: 20
-    rankC: 30
-  - levelIndex: 2
-    rankA: 10
-    rankB: 20
-    rankC: 30
-  - levelIndex: 3
-    rankA: 10
-    rankB: 20
-    rankC: 30
-  - levelIndex: 4
-    rankA: 10
-    rankB: 20
-    rankC: 30
+  - m_levelIndex: 1
+    m_rankA: 30
+    m_rankB: 55
+    m_rankC: 60
+  - m_levelIndex: 2
+    m_rankA: 33
+    m_rankB: 55
+    m_rankC: 60
+  - m_levelIndex: 3
+    m_rankA: 35
+    m_rankB: 55
+    m_rankC: 60
+  - m_levelIndex: 4
+    m_rankA: 36
+    m_rankB: 45
+    m_rankC: 50
+  - m_levelIndex: 0
+    m_rankA: 0
+    m_rankB: 0
+    m_rankC: 0

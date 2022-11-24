@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
         } 
         else 
         { 
-            instance = this; 
+            instance = this;
+            DontDestroyOnLoad(this.gameObject); 
         }
 
         Time.timeScale = 1f;

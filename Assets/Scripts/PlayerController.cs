@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController i{get; private set;}
+    //public static PlayerController i{get; private set;}
 
     public float velocimetro = 0;
+
     public float m_SpeedForce = 500f;
     public float m_MaxSpeed = 40f;
+    private float m_ActualMaxSpeed = 0;
+    public float m_MaxFallSpeed = 40f;
     public float m_JumpForce = 300f;
     
     public float m_MaxDrag = 1f;
     public float m_MinDrag = 0f;
+
+    public float m_acceleration = 5;
+    private float m_accel = 0;
 
     Rigidbody myRigid;
 
@@ -27,6 +33,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         myRigid = gameObject.GetComponent<Rigidbody>();
+        m_ActualMaxSpeed = m_MaxSpeed;
     }
 
     void Update()
@@ -38,14 +45,22 @@ public class PlayerController : MonoBehaviour
         }
         SpeedEffect(speedLimitForEffects);
 
+        Acceleration(m_acceleration);
+
         velocimetro = myRigid.velocity.magnitude;
     }
     void FixedUpdate()
     {
         Movement();
-        if (myRigid.velocity.magnitude > m_MaxSpeed)
+        if (myRigid.velocity.magnitude >= m_ActualMaxSpeed)
         {
-            myRigid.velocity = myRigid.velocity.normalized * m_MaxSpeed;
+            myRigid.velocity = myRigid.velocity.normalized * m_ActualMaxSpeed;
+            myRigid.velocity = new Vector3 
+            (
+                Mathf.Clamp(myRigid.velocity.x,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel),
+                Mathf.Clamp(myRigid.velocity.y,-m_MaxFallSpeed, m_MaxFallSpeed),
+                Mathf.Clamp(myRigid.velocity.z,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel)
+            );
         }
         if (jumpInput)
         {
@@ -100,12 +115,13 @@ public class PlayerController : MonoBehaviour
 
         Vector3 _xz = new Vector3(_moveHorizontal,0,_moveVertical);
         Vector3 movement = Camera.main.transform.TransformDirection(_xz);
+
         movement.y = 0;
         movement = movement.normalized;
 
         if (isGrounded())
         {
-            myRigid.AddForce(movement * m_SpeedForce);          
+            myRigid.AddForce(movement * m_SpeedForce ,ForceMode.Acceleration);          
 
             if (isOnMove())
             {
@@ -135,6 +151,22 @@ public class PlayerController : MonoBehaviour
             myRigid.AddForce(movement * m_SpeedForce);
         }
       
+    }
+
+    void Acceleration(float _accel)
+    {
+        float _timer =+ Time.deltaTime;
+
+        if (myRigid.velocity.magnitude >= m_MaxSpeed - 1)
+        {
+            m_accel = m_accel + _timer * _accel;
+        }
+        if (myRigid.velocity.magnitude < m_MaxSpeed - 3)
+        {
+            m_accel = 0;
+        }
+        m_ActualMaxSpeed = m_MaxSpeed + m_accel;
+
     }
 
     void Jump()

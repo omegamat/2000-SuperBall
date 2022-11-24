@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
         //float milliSeconds = 0;
         //milliSeconds += (secondsCount * 100)% 100;
 
-        velocity = player.velocimetro;
+        velocity = player.velocimetro * 10;
         //TimeText.text = "" + (int)secondsCount + "." + milliSeconds;
         TimeText.text = CountUpTimer();
         VelocityText.text = "" + (int)velocity;  

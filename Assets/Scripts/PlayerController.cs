@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     private bool jumpInput = true;
 
     public ParticleSystem jumpEffect;
+    public ParticleSystem FallImpactEffect;
+    private bool canFallImpactEffect = false;
     //public ParticleSystem SpeedLineEffect;
     public ParticleSystem SpeedParticuleEffect;
 
@@ -43,6 +45,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpInput = true;
+            
         }
         SpeedEffect(speedLimitForEffects);
 
@@ -50,7 +53,8 @@ public class PlayerController : MonoBehaviour
 
         
 
-        velocimetro = myRigid.velocity.magnitude;
+        velocimetro = new Vector3(myRigid.velocity.x,0,myRigid.velocity.z).magnitude;
+        //velocimetro = myRigid.velocity.magnitude;
     }
     void FixedUpdate()
     {
@@ -150,7 +154,7 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded())
         {
             //decrease drag whent player is on air.
-            myRigid.drag = 0;
+            myRigid.drag = 0.5f;
             myRigid.AddForce(movement * m_SpeedForce);
         }
       
@@ -179,11 +183,23 @@ public class PlayerController : MonoBehaviour
             myRigid.AddForce(m_JumpForce * Vector3.up);
             jumpEffect.Play();
             Debug.Log("jump!");
+
+            canFallImpactEffect = true;
         }
         if (!isGrounded())
         {
             Debug.Log("CAN't jump");
         }
+
+    }
+    private void OnCollisionEnter(Collision col) 
+    {
+        if(canFallImpactEffect)
+        {
+            FallImpactEffect.Play();
+            canFallImpactEffect = false;
+        }
+            
 
     }
 

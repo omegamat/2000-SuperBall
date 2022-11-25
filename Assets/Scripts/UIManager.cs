@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
 
     private int coins = 0;
 
-        private void Awake() 
+    private void Awake() 
     {
         if (instance != null && instance != this) 
         { 
@@ -44,7 +44,10 @@ public class UIManager : MonoBehaviour
 
         sc_Timetext = scoreScreen.GetChild(0).gameObject.GetComponent<Text>();
         sc_cointext = scoreScreen.GetChild(1).gameObject.GetComponent<Text>();
-        sc_Ranktext = scoreScreen.GetChild(2).GetChild(0).gameObject.GetComponent<TMP_Text>(); 
+        sc_Ranktext = scoreScreen.GetChild(2).GetChild(0).gameObject.GetComponent<TMP_Text>();
+
+        if(player == null)
+            player = GameObject.Find("Ball").GetComponent<PlayerController>(); 
          
     }
     private void Update() 

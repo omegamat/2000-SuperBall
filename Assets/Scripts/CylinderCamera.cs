@@ -8,6 +8,8 @@ public class CylinderCamera : MonoBehaviour
     public Transform m_player;
     public Transform m_CameraPosition;
     public CinemachineVirtualCamera m_cm;
+
+    public float m_cameraDistance = 100f;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +29,7 @@ public class CylinderCamera : MonoBehaviour
         Vector3 _heading  = m_player.position - transform.position;
         float _distance = _heading.magnitude;
         Vector3 _dir = _heading / _distance;
-        Vector3 _cameraPos = new Vector3(_dir.x * 70,m_player.position.y + 10,_dir.z * 70);
+        Vector3 _cameraPos = new Vector3(_dir.x * m_cameraDistance,m_player.position.y + 10,_dir.z * m_cameraDistance);
 
         m_CameraPosition.transform.position = _cameraPos + transform.position;
     }
@@ -48,12 +50,13 @@ public class CylinderCamera : MonoBehaviour
         Vector3 _heading  = m_player.position - transform.position;
         float _distance = _heading.magnitude;
         Vector3 _dir = _heading / _distance;
+        Vector3 _cameraPos = new Vector3(_dir.x * m_cameraDistance,m_player.position.y + 10,_dir.z * m_cameraDistance);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, _dir * 70);
+        Gizmos.DrawRay(transform.position, _dir * m_cameraDistance);
         //Gizmos.DrawSphere(_lookPosition)
         //Gizmos.color = Color.cyan;
         //Gizmos.DrawLine(_myPosition, _lookPosition);
-        Gizmos.DrawSphere((_dir * 70) + transform.position , 10);
+        Gizmos.DrawSphere(_cameraPos + transform.position , 10);
     }
 }

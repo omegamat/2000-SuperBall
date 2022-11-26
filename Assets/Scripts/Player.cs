@@ -11,15 +11,23 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
         m_playerController = gameObject.GetComponent<PlayerController>();
         if(m_playerController == null)
-            Debug.LogWarning("PlayerController in" + gameObject.name + " Missing");  
-        
+            Debug.LogWarning("PlayerController in" + gameObject.name + " Missing");      
     }
     void Update()
     {
         Wings();
+
+        if (m_playerController.isGliding)
+        {
+            m_Wings.SetActive(true);
+        }
+        if (!m_playerController.isGliding)
+        {
+            m_Wings.SetActive(false);
+        }
+        
     }
     void Wings()
     {
@@ -30,20 +38,12 @@ public class Player : MonoBehaviour
         Vector3 _xz = new Vector3(_moveHorizontal,0,_moveVertical);
         Vector3 _dir = _xz + this.transform.localPosition;
 
-        m_Wings.transform.DOLookAt(_dir ,1f);
+        m_Wings.transform.DOLookAt(_dir ,1.5f);
 
-        if(m_playerController.isGrounded())
-        {
-
-            //m_Wings.SetActive(false);
-            m_WingsMat.DOFade(0,1);
-
-            
-        }
         if(!m_playerController.isGrounded())
         {
-            //m_Wings.SetActive(true);
-            m_WingsMat.DOFade(255,1);
+            m_Wings.SetActive(true);
+            //m_WingsMat.DOFade(255,1);
         }
     }
 }

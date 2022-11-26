@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     public float m_acceleration = 2;
     private float m_accel = 0;
 
+    public bool isGliding{ get; private set;}
+
     Rigidbody myRigid;
 
     private bool jumpInput = true;
@@ -50,31 +52,66 @@ public class PlayerController : MonoBehaviour
         SpeedEffect(speedLimitForEffects);
 
         Acceleration(m_acceleration);
+        if(isGrounded())
+        {
+            isGliding = false;
+        }
+        if(!isGrounded())
+        {
+            if(Input.GetButtonDown("Jump"))
+            {
+                GlideSwitch();
+            }               
+        }
 
+         
+
+        if (isGliding)
+        {
+            m_MaxFallSpeed = 10;
+        }
+        if (!isGliding)
+        {
+            m_MaxFallSpeed = 30000;
+        }
         
 
-        velocimetro = new Vector3(myRigid.velocity.x,0,myRigid.velocity.z).magnitude;
+        velocimetro = myRigid.velocity.magnitude;
         //velocimetro = myRigid.velocity.magnitude;
     }
     void FixedUpdate()
     {
         Movement();
-        if (myRigid.velocity.magnitude >= m_ActualMaxSpeed)
-        {
-            myRigid.velocity = myRigid.velocity.normalized * m_ActualMaxSpeed;
-            myRigid.velocity = new Vector3 
-            (
-                Mathf.Clamp(myRigid.velocity.x,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel),
-                Mathf.Clamp(myRigid.velocity.y,-m_MaxFallSpeed, m_MaxFallSpeed * 10),
-                Mathf.Clamp(myRigid.velocity.z,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel)
-            );
-        }
         if (jumpInput)
         {
-            Jump();
-            
-
+            Jump();           
             jumpInput = false;
+        }
+
+        if(myRigid.velocity.magnitude > m_MaxSpeed)
+        {
+            //myRigid.velocity = myRigid.velocity.normalized * m_ActualMaxSpeed;
+
+        }
+
+        myRigid.velocity = new Vector3 
+        (
+            Mathf.Clamp(myRigid.velocity.x,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel),
+            Mathf.Clamp(myRigid.velocity.y,-m_MaxFallSpeed, 9000),
+            Mathf.Clamp(myRigid.velocity.z,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel)
+        );
+        
+        if(myRigid.velocity.y < 0)
+        {
+            myRigid.velocity += Vector3.up * Physics.gravity.y * (3.5f -1) * Time.deltaTime;
+        }
+        else if(myRigid.velocity.y > 0)
+        {
+            myRigid.velocity += Vector3.up * Physics.gravity.y * (1.5f -1) * Time.deltaTime;
+        }
+        else if(myRigid.velocity.y < 0 && isGliding)
+        {
+            myRigid.velocity += Vector3.up * Physics.gravity.y * (0.3f -1) * Time.deltaTime;
         }
         
     }
@@ -215,6 +252,12 @@ public class PlayerController : MonoBehaviour
             //SpeedLineEffect.Stop();
             SpeedParticuleEffect.Stop();
         }
+    }
+
+    public void GlideSwitch()
+    {
+        isGliding = !isGliding;
+
     }
 
     public void Respawn()

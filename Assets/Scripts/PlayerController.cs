@@ -7,33 +7,36 @@ public class PlayerController : MonoBehaviour
 {
     //public static PlayerController i{get; private set;}
 
-    public float velocimetro = 0;
+    public float velocimetro{get; private set;}
+    public bool isGliding{ get; private set;}
 
+    [Header("Move")]
     public float m_SpeedForce = 80;
     public float m_MaxSpeed = 35f;
+    public float m_acceleration = 2;
+    private float m_accel = 0;
     private float m_ActualMaxSpeed = 0;
+
+    [Header("Jump")]
     public float m_MaxFallSpeed = 35f;
     public float m_JumpForce = 2000f;
     
+    [Header("Drag")]
     public float m_MaxDrag = 1f;
     public float m_MinDrag = 0f;
 
-    public float m_acceleration = 2;
-    private float m_accel = 0;
-
-    public bool isGliding{ get; private set;}
-
-    Rigidbody myRigid;
-
-    private bool jumpInput = true;
-
+    [Header("Effects")]
     public ParticleSystem jumpEffect;
     public ParticleSystem FallImpactEffect;
-    private bool canFallImpactEffect = false;
-    //public ParticleSystem SpeedLineEffect;
     public ParticleSystem SpeedParticuleEffect;
+    public float speedLimitForEffects = 30f;  
+    private bool canFallImpactEffect = false;
 
-    public float speedLimitForEffects = 30f;   
+    public Rigidbody myRigid{ get; private set;}
+    private bool jumpInput = true;
+    public LayerMask ignoreLayer;
+
+ 
     
     protected virtual void Start()
     {
@@ -123,7 +126,7 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit _hit;
 
-        if (Physics.SphereCast(_ray,0.4f,out _hit,0.9f) )
+        if (Physics.SphereCast(_ray,0.4f,out _hit,0.9f,~ignoreLayer) )
         {
             //Debug.Log("Hit!..." + _hit.transform.name);
             return true;

@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     private PlayerController m_playerController;
     public GameObject m_Wings;
-    public Material m_WingsMat;
 
     void Start()
     {
@@ -37,6 +36,7 @@ public class Player : MonoBehaviour
 
         Vector3 _xz = new Vector3(_moveHorizontal,0,_moveVertical);
         Vector3 _dir = _xz + this.transform.localPosition;
+
 
         m_Wings.transform.DOLookAt(_dir ,1.5f);
 

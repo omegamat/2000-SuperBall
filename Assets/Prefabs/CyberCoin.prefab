@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7579459340626534686}
   - component: {fileID: 3334491598058947955}
   - component: {fileID: 2080484029495675111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1153883879529159242}
   - component: {fileID: 1902955822675026814}
   - component: {fileID: 188131225337535113}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CubeSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4964,7 +4964,7 @@ GameObject:
   - component: {fileID: 1364948769446196118}
   - component: {fileID: 6918197345530486323}
   - component: {fileID: 8836620981655554551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Quad (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5049,7 +5049,7 @@ GameObject:
   - component: {fileID: 3499881434442268064}
   - component: {fileID: 537141315863961415}
   - component: {fileID: 7993665019599148283}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5409,7 +5409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 572772080012212119}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5445,7 +5445,7 @@ GameObject:
   - component: {fileID: 2443125580189570066}
   - component: {fileID: 7764454378108584965}
   - component: {fileID: 7302080390372546001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FxCircleParticule (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10321,7 +10321,7 @@ GameObject:
   - component: {fileID: 887512601868207323}
   - component: {fileID: 4416379760589720823}
   - component: {fileID: 4852964039051074296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Quad (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10404,7 +10404,7 @@ GameObject:
   - component: {fileID: 4264324631129606294}
   - component: {fileID: 8448940603248102547}
   - component: {fileID: 893598977067115498}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SquareParticule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15281,7 +15281,7 @@ GameObject:
   - component: {fileID: 6784310377264717430}
   - component: {fileID: 1391744934550645974}
   - component: {fileID: 6591575793640864787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CyberCoin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15317,7 +15317,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.75
+  m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1391744934550645974
 MonoBehaviour:

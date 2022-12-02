@@ -16,14 +16,22 @@ public class PlayerController : MonoBehaviour
     public float m_acceleration = 2;
     private float m_accel = 0;
     private float m_ActualMaxSpeed = 0;
-
+  
     [Header("Jump")]
-    public float m_MaxFallSpeed = 35f;
     public float m_JumpForce = 2000f;
+
+    [Header("Fall")]
+    private float m_FallSpeed = 0f;
+    public float m_TopMaxFallSpeed = 450f;
+    public float m_GlideMaxFallSpeed = 8f;
+    public float m_HigherGravity = 3f;
+    public float m_LowerGravity = 1.5f;
     
     [Header("Drag")]
-    public float m_MaxDrag = 1f;
+    public float m_MaxDrag = 4f;
+    public float m_MidDrag = 1f;
     public float m_MinDrag = 0f;
+    public float m_AirDrag = 0.5f;
 
     [Header("Effects")]
     public ParticleSystem jumpEffect;
@@ -42,6 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         myRigid = gameObject.GetComponent<Rigidbody>();
         m_ActualMaxSpeed = m_MaxSpeed;
+        m_FallSpeed = m_TopMaxFallSpeed;
     }
 
     protected virtual void Update()
@@ -71,11 +80,11 @@ public class PlayerController : MonoBehaviour
 
         if (isGliding)
         {
-            m_MaxFallSpeed = 10;
+            m_FallSpeed = m_GlideMaxFallSpeed;
         }
         if (!isGliding)
         {
-            m_MaxFallSpeed = 30000;
+            m_FallSpeed = m_TopMaxFallSpeed;
         }
         
 
@@ -100,17 +109,17 @@ public class PlayerController : MonoBehaviour
         myRigid.velocity = new Vector3 
         (
             Mathf.Clamp(myRigid.velocity.x,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel),
-            Mathf.Clamp(myRigid.velocity.y,-m_MaxFallSpeed, 9000),
+            Mathf.Clamp(myRigid.velocity.y,-m_FallSpeed, 9000),
             Mathf.Clamp(myRigid.velocity.z,-m_ActualMaxSpeed - m_accel, m_ActualMaxSpeed + m_accel)
         );
         
         if(myRigid.velocity.y < 0)
         {
-            myRigid.velocity += Vector3.up * Physics.gravity.y * (3.5f -1) * Time.deltaTime;
+            myRigid.velocity += Vector3.up * Physics.gravity.y * (m_HigherGravity -1) * Time.deltaTime;
         }
-        else if(myRigid.velocity.y > 0)
+        else if(myRigid.velocity.y > 0 && !Input.GetButton("Jump"))
         {
-            myRigid.velocity += Vector3.up * Physics.gravity.y * (1.5f -1) * Time.deltaTime;
+            myRigid.velocity += Vector3.up * Physics.gravity.y * (m_LowerGravity -1) * Time.deltaTime;
         }
         else if(myRigid.velocity.y < 0 && isGliding)
         {
@@ -173,19 +182,19 @@ public class PlayerController : MonoBehaviour
             if (isOnMove())
             {
                 //decrease drag whent player is pressing the movemente input.
-                myRigid.angularDrag = 1f;
+                //myRigid.angularDrag = 1f;
                 //myRigid.angularDrag = Mathf.Clamp(myRigid.angularDrag, 1f, 2f);
 
-                myRigid.drag = 1f;
+                myRigid.drag = m_MidDrag;
                 //myRigid.drag = Mathf.Clamp(myRigid.drag, m_MinDrag, m_MaxDrag);
             }           
             if (!isOnMove())
             {
                 //increse drag whent player is NOT pressing the movemente input.
-                myRigid.angularDrag = 1.5f;
+                //myRigid.angularDrag = 1.5f;
                 //myRigid.angularDrag = Mathf.Clamp(myRigid.angularDrag, 0.05f, 2f);
 
-                myRigid.drag = 1.5f;
+                myRigid.drag = m_MaxDrag;
                 //myRigid.drag = Mathf.Clamp(myRigid.drag, m_MinDrag, m_MaxDrag);
             }
 
@@ -194,7 +203,7 @@ public class PlayerController : MonoBehaviour
         if (!isGrounded())
         {
             //decrease drag whent player is on air.
-            myRigid.drag = 0.5f;
+            myRigid.drag = m_AirDrag;
             myRigid.AddForce(movement * m_SpeedForce);
         }
       

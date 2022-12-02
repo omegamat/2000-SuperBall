@@ -35,10 +35,10 @@ public class Player : MonoBehaviour
         float _moveVertical = Input.GetAxis("Vertical");
 
         Vector3 _xz = new Vector3(_moveHorizontal,0,_moveVertical);
-        Vector3 _dir = _xz + this.transform.localPosition;
+        Vector3 _dir = _xz + this.transform.position;
 
 
-        m_Wings.transform.DOLookAt(_dir ,1.5f);
+        m_Wings.transform.DOLookAt(_dir ,1.5f);;
 
         if(!m_playerController.isGrounded())
         {

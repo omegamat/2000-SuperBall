@@ -12,7 +12,13 @@ public class MainMenu : MonoBehaviour
     public AudioMixer audioMixer;
     //public AudioMixer musicGroup;
     //public AudioMixer soundEffectGroup;
-
+    private void Update() 
+    {
+        if(GameObject.Find("junkerbox"))
+        {
+            Destroy(GameObject.Find("junkerbox").gameObject);         
+        }
+    }
     public void OnQuit()
     {
         Application.Quit();

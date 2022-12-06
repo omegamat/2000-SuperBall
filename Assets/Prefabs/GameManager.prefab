@@ -48,23 +48,43 @@ MonoBehaviour:
   m_cyberCoins: 0
   m_medals: 0
   scoreScreenRanks:
-  - m_levelIndex: 1
-    m_rankA: 30
-    m_rankB: 55
-    m_rankC: 60
-  - m_levelIndex: 2
-    m_rankA: 33
-    m_rankB: 55
-    m_rankC: 60
-  - m_levelIndex: 3
-    m_rankA: 35
-    m_rankB: 55
-    m_rankC: 60
-  - m_levelIndex: 4
-    m_rankA: 36
-    m_rankB: 45
-    m_rankC: 50
   - m_levelIndex: 0
     m_rankA: 0
     m_rankB: 0
     m_rankC: 0
+  - m_levelIndex: 1
+    m_rankA: 37
+    m_rankB: 46
+    m_rankC: 50
+  - m_levelIndex: 2
+    m_rankA: 45
+    m_rankB: 50
+    m_rankC: 55
+  - m_levelIndex: 3
+    m_rankA: 40
+    m_rankB: 45
+    m_rankC: 50
+  - m_levelIndex: 4
+    m_rankA: 12
+    m_rankB: 20
+    m_rankC: 25
+  - m_levelIndex: 5
+    m_rankA: 33
+    m_rankB: 40
+    m_rankC: 45
+  - m_levelIndex: 6
+    m_rankA: 32
+    m_rankB: 36
+    m_rankC: 35
+  - m_levelIndex: 7
+    m_rankA: 20
+    m_rankB: 25
+    m_rankC: 30
+  - m_levelIndex: 8
+    m_rankA: 26
+    m_rankB: 30
+    m_rankC: 40
+  - m_levelIndex: 9
+    m_rankA: 52
+    m_rankB: 58
+    m_rankC: 64

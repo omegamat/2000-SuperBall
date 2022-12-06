@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         myRigid = gameObject.GetComponent<Rigidbody>();
         m_ActualMaxSpeed = m_MaxSpeed;
-        m_FallSpeed = m_TopMaxFallSpeed;
+        m_FallSpeed = m_TopMaxFallSpeed;      
     }
 
     protected virtual void Update()
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
 
         RaycastHit _hit;
 
-        if (Physics.SphereCast(_ray,0.4f,out _hit,0.9f,~ignoreLayer) )
+        if (Physics.SphereCast(_ray,0.6f,out _hit,1f,~ignoreLayer) )
         {
             //Debug.Log("Hit!..." + _hit.transform.name);
             return true;

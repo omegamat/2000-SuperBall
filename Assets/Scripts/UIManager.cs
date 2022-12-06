@@ -27,6 +27,9 @@ public class UIManager : MonoBehaviour
     private Text sc_cointext;
     private Text sc_Timetext;
     private TMP_Text sc_Ranktext;
+    private TMP_Text sc_RanktextA;
+    private TMP_Text sc_RanktextB;
+    private TMP_Text sc_RanktextC;
     private Image playerUI_velocimetro;
 
     private int coins = 0;
@@ -45,6 +48,9 @@ public class UIManager : MonoBehaviour
         sc_Timetext = scoreScreen.GetChild(0).gameObject.GetComponent<Text>();
         sc_cointext = scoreScreen.GetChild(1).gameObject.GetComponent<Text>();
         sc_Ranktext = scoreScreen.GetChild(2).GetChild(0).gameObject.GetComponent<TMP_Text>();
+        sc_RanktextA = scoreScreen.GetChild(2).GetChild(1).gameObject.GetComponent<TMP_Text>();
+        sc_RanktextB = scoreScreen.GetChild(2).GetChild(2).gameObject.GetComponent<TMP_Text>();
+        sc_RanktextC = scoreScreen.GetChild(2).GetChild(3).gameObject.GetComponent<TMP_Text>();
 
         if(player == null)
             player = GameObject.Find("Ball").GetComponent<PlayerController>(); 
@@ -83,9 +89,7 @@ public class UIManager : MonoBehaviour
         float _seconds = 0;
         float _milliSeconds = 0;
         string output;
-
-        
-
+       
         _minutes = timer / 60;
         _seconds = timer % 60;
         _milliSeconds += (timer * 100) % 100;
@@ -95,8 +99,24 @@ public class UIManager : MonoBehaviour
         //Debug.Log ("timer" + output);
 
         return output;
+       
+    }
+    string SecondsToClock(float _TimeInseconds)
+    {
+        float _minutes = 0;
+        float _seconds = 0;
+        float _milliSeconds = 0;
+        string output;
 
-        
+        _minutes = _TimeInseconds / 60;
+        _seconds = _TimeInseconds % 60;
+        _milliSeconds += (_TimeInseconds * 100) % 100;
+
+        output = string.Format("{0}:{1}:{2}", (int)_minutes, (int)_seconds, (int)_milliSeconds);
+        //output = ""+ timer;
+        //Debug.Log ("timer" + output);
+
+        return output;
     }
     private void SettingVelocimetro()
     {
@@ -119,25 +139,28 @@ public class UIManager : MonoBehaviour
 
         int levelIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if(timer >= GameManager.instance.scoreScreenRanks[levelIndex].m_rankC)
-        {
-            sc_Ranktext.text = "C";
-        }
-        if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankC)
-        {
-            sc_Ranktext.text = "C";
-        }
-        if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankB)
-        {
-            sc_Ranktext.text = "B";
-        }
+        sc_RanktextA.text = SecondsToClock(GameManager.instance.scoreScreenRanks[levelIndex].m_rankA);
+        sc_RanktextB.text = SecondsToClock(GameManager.instance.scoreScreenRanks[levelIndex].m_rankB);
+        sc_RanktextC.text = SecondsToClock(GameManager.instance.scoreScreenRanks[levelIndex].m_rankC);
+
+        
+        
         if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankA)
         {
             sc_Ranktext.text = "A";
         }
-        
-        
-        
+        else if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankB)
+        {
+            sc_Ranktext.text = "B";
+        }
+        else if(timer <= GameManager.instance.scoreScreenRanks[levelIndex].m_rankC)
+        {
+            sc_Ranktext.text = "C";
+        }
+        else if(timer > GameManager.instance.scoreScreenRanks[levelIndex].m_rankC)
+        {
+            sc_Ranktext.text = "D";
+        }              
     }
     public void ReciveCoins()
     {

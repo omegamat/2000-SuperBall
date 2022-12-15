@@ -7,6 +7,13 @@ public class Player : MonoBehaviour
 {
     private PlayerController m_playerController;
     public GameObject m_Wings;
+    public GameObject m_BodyAnchor;
+    public GameObject m_Body;
+
+    public Vector3 m_rotation;
+    public float m_rotationSpeed;
+    private Vector3 _eulerAngles;
+    public Vector3 _lookOffset;
 
     void Start()
     {
@@ -17,16 +24,31 @@ public class Player : MonoBehaviour
     void Update()
     {
         Wings();
+        Body();
 
         if (m_playerController.isGliding)
         {
             m_Wings.SetActive(true);
-        }
+        }      
         if (!m_playerController.isGliding)
         {
             m_Wings.SetActive(false);
         }
         
+    }
+    void Body()
+    {
+        //m_playerController.myRigid.velocity.normalized + m_Body.transform.position;
+        Vector3 _VelocityDirection;
+        //Vector3 _eulerAngles = Vector3.one;
+        _VelocityDirection = m_playerController.myRigid.velocity.normalized + m_BodyAnchor.transform.position;
+        //_eulerAngles += (m_rotation) * Time.deltaTime * (m_rotationSpeed * m_playerController.myRigid.velocity.magnitude);
+        _eulerAngles += (new Vector3(0,0,m_rotation.z * Time.deltaTime * (m_rotationSpeed * m_playerController.myRigid.velocity.magnitude))) ;
+
+        m_BodyAnchor.transform.LookAt(_VelocityDirection);
+        //m_Body.transform.eulerAngles = new Vector3(0,0,90);
+
+        m_Body.transform.localEulerAngles = _eulerAngles + new Vector3(0,90,0);       
     }
     void Wings()
     {

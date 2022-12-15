@@ -41,13 +41,16 @@ public class PlayerController : MonoBehaviour
     private bool canFallImpactEffect = false;
 
     public Rigidbody myRigid{ get; private set;}
+    private JoyStick m_joyStick;
     private bool jumpInput = true;
     public LayerMask ignoreLayer;
+    private bool UIJumpInput = false;
 
  
     
     protected virtual void Start()
     {
+        m_joyStick = gameObject.GetComponent<JoyStick>();
         myRigid = gameObject.GetComponent<Rigidbody>();
         m_ActualMaxSpeed = m_MaxSpeed;
         m_FallSpeed = m_TopMaxFallSpeed;      
@@ -56,7 +59,7 @@ public class PlayerController : MonoBehaviour
     protected virtual void Update()
     {
         //save jump input to be used in fixed update.
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") || UIJumpInput)
         {
             jumpInput = true;
             
@@ -73,6 +76,7 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown("Jump"))
             {
                 GlideSwitch();
+                //UIJumpInput = false;
             }               
         }
 
@@ -98,6 +102,7 @@ public class PlayerController : MonoBehaviour
         {
             Jump();           
             jumpInput = false;
+            UIJumpInput = false;
         }
 
         if(myRigid.velocity.magnitude > m_MaxSpeed)
@@ -170,7 +175,7 @@ public class PlayerController : MonoBehaviour
         float _moveVertical = Input.GetAxis("Vertical");
 
         Vector3 _xz = new Vector3(_moveHorizontal,0,_moveVertical);
-        Vector3 movement = Camera.main.transform.TransformDirection(_xz);
+        Vector3 movement = Camera.main.transform.TransformDirection(_xz) + m_joyStick.TouchJoyStickAxis();
 
         movement.y = 0;
         movement = movement.normalized;
@@ -279,6 +284,15 @@ public class PlayerController : MonoBehaviour
     public void Reset()
     {
         UIManager.ResetScene();
+    }
+
+    public void JumpInput()
+    {
+        Jump();
+        if(!isGrounded())
+        {
+            GlideSwitch();
+        }
     }
 
 
